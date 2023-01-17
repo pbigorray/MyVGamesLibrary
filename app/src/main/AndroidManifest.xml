@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVGamesLibrary">
         <activity
+            android:name=".GameInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".VideoGames"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

@@ -12,7 +12,7 @@ import com.pabiya.myvgameslibrary.db.DBUsersHelper;
 
 public class LoginActivity extends AppCompatActivity {
     EditText userText,passText,conPassText;
-    Button login, signIn;
+    Button login, signUp;
     DBUsersHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         passText=findViewById(R.id.passText);
         conPassText=findViewById(R.id.conPassText);
         login =findViewById(R.id.login);
-        signIn=findViewById(R.id.signIn);
+        signUp =findViewById(R.id.signUp);
 
         DB = new DBUsersHelper(this);
 
@@ -39,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (!DB.checkUser(user)){
                         if (!DB.checkUserPass(user,pass)){
                             Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                            Intent intent = new Intent(getApplicationContext(),SplashActivity.class);
+                            intent.putExtra("name",user);
                             startActivity(intent);
                         }else {
                             Toast.makeText(this, "la contraseña no es correcta", Toast.LENGTH_SHORT).show();
@@ -49,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
             }
         });
-
+        signUp.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        });
     }
 }

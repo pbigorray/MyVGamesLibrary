@@ -1,10 +1,12 @@
 package com.pabiya.myvgameslibrary.activitys;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pabiya.myvgameslibrary.db.DBGamesHelper;
 import com.pabiya.myvgameslibrary.R;
+
+import java.util.ArrayList;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>{
     private LayoutInflater inflater;
@@ -36,16 +40,37 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Game g = DB.getAll().get(position);
+//        Game g = DB.getAll().get(position);
 
-        holder.id.setText(g.getId());
-        holder.name.setText(g.getName());
+        Cursor cursor = DB.getAll();
+
+        if (cursor.getCount()==0){
+            Toast.makeText(inflater.getContext(), "esta vacio", Toast.LENGTH_SHORT).show();
+        }
+
+        ArrayList<Game> gameList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                gameList.add(new Game(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getFloat(3),
+                        cursor.getInt(4)));
+            } while (cursor.moveToNext());
+
+        }
+
+        Game g = gameList.get(position);
+
+        holder.id.setText("ID: "+g.getId());
+        holder.name.setText(""+g.getName());
     }
 
 
     @Override
     public int getItemCount() {
-        return DB.getAll().size();
+        return 4;
     }
 
 
@@ -54,7 +79,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
        TextView id,name;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            id=itemView.findViewById(R.id.id);
+            id=itemView.findViewById(R.id.idGame);
             name=itemView.findViewById(R.id.nombre);
         }
     }

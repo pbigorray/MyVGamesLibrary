@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         bienvenida.setText("Bienvenido "+aux.getString("name"));
         new Handler().postDelayed(new Runnable(){
             public void run(){
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, VideoGames.class);
                 startActivity(intent);
                 finish();
             };
