@@ -39,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!DB.checkUser(user)){
                         if (!DB.checkUserPass(user,pass)){
                             Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show();
+                            if (DB.checkAdminUser(user)){
+                                Toast.makeText(this, "Usuario admin", Toast.LENGTH_SHORT).show();
+                            }
                             Intent intent = new Intent(getApplicationContext(),SplashActivity.class);
                             intent.putExtra("name",user);
                             startActivity(intent);

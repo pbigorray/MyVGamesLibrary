@@ -20,4 +20,16 @@ public class Game {
     public String getName() {
         return name;
     }
+
+    public int getAlquilado() {
+        return alquilado;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getGender() {
+        return gender;
+    }
 }

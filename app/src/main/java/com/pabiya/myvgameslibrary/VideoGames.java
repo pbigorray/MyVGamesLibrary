@@ -21,7 +21,7 @@ public class VideoGames extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_games);
         DB= new DBGamesHelper(this);
-        DB.addData();
+//        DB.addData();
         recycler=findViewById(R.id.recicle);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, RecyclerView.VERTICAL);
@@ -38,11 +38,9 @@ public class VideoGames extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        Intent intent =new Intent(getApplicationContext(),SecondActivity.class);
-        int position=recyclerView.getChildAdapterPosition(view);
+        Intent intent =new Intent(getApplicationContext(),GameInfoActivity.class);
+        int position=recycler.getChildAdapterPosition(view);
         intent.putExtra("position",position);
-        intent.putExtra("roo",root);
-        intent.putExtra("city",ciudad);
         startActivity(intent);
     }
 }

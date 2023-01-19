@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import com.pabiya.myvgameslibrary.activitys.Game;
 
@@ -62,10 +63,28 @@ public class DBGamesHelper extends SQLiteOpenHelper {
 //        Cursor cursor=db.rawQuery("select * from games where user=? and password=?",new String[]{user,password});
 //        return cursor.getCount() <= 0;
 //    }
-    public Cursor getAll(){
+//    public Cursor getAll(){
+//        SQLiteDatabase db =this.getReadableDatabase();
+//        Cursor cursor=db.rawQuery("select * from games",null);
+//        return cursor;
+//    }
+    public List<Game> getAll(){
         SQLiteDatabase db =this.getReadableDatabase();
         Cursor cursor=db.rawQuery("select * from games",null);
-        return cursor;
+
+        ArrayList<Game> gameList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                gameList.add(new Game(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getFloat(3),
+                        cursor.getInt(4)));
+            } while (cursor.moveToNext());
+
+        }
+
+        return gameList;
     }
 
 }

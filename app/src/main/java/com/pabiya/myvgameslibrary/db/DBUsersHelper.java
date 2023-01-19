@@ -54,8 +54,13 @@ public class DBUsersHelper extends SQLiteOpenHelper {
     }
     public boolean checkAdminUser(String user){
         SQLiteDatabase db =this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("select * from users where user=? and admin=1",new String[]{user});
-        return cursor.getCount() <= 0;
+        Cursor cursor=db.rawQuery("select * from users where user=?",new String[]{user});
+        if (cursor.moveToFirst())
+        if (cursor.getInt(3)==1){
+            return true;
+        }
+        return false;
+
     }
     public void dbClose(){
         db.close();

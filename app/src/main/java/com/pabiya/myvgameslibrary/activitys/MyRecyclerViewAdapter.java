@@ -40,28 +40,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//        Game g = DB.getAll().get(position);
-
-        Cursor cursor = DB.getAll();
-
-        if (cursor.getCount()==0){
-            Toast.makeText(inflater.getContext(), "esta vacio", Toast.LENGTH_SHORT).show();
-        }
-
-        ArrayList<Game> gameList = new ArrayList<>();
-
-        if (cursor.moveToFirst()) {
-            do {
-                gameList.add(new Game(cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getFloat(3),
-                        cursor.getInt(4)));
-            } while (cursor.moveToNext());
-
-        }
-
-        Game g = gameList.get(position);
+        Game g = DB.getAll().get(position);
 
         holder.id.setText("ID: "+g.getId());
         holder.name.setText(""+g.getName());
@@ -70,7 +49,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return 4;
+        return DB.getAll().size();
     }
 
 
