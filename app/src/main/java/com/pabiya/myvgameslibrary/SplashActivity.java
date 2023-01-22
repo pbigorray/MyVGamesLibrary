@@ -19,9 +19,11 @@ public class SplashActivity extends AppCompatActivity {
         bienvenida=findViewById(R.id.bienvenida);
 
         bienvenida.setText("Bienvenido "+aux.getString("name"));
+
         new Handler().postDelayed(new Runnable(){
             public void run(){
                 Intent intent = new Intent(SplashActivity.this, VideoGames.class);
+                intent.putExtra("admin",aux.getBoolean("admin"));
                 startActivity(intent);
                 finish();
             };

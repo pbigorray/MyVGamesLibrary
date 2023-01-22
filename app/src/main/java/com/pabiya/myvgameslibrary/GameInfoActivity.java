@@ -33,5 +33,11 @@ public class GameInfoActivity extends AppCompatActivity {
         id.setText(""+g.getId());
         price.setText("Precio: "+g.getPrice());
         gender.setText("Generos: "+g.getGender());
+
+        if (g.getAlquilado()==1){
+            alquilado.setText("Alquilado");
+        }else {
+            alquilado.setText("Disponible");
+        }
     }
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5B8F4"
+    tools:context=".activitys.AddGameActivity">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="App realizada por Pau Bigorra Yanguas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/edittextbackground"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/genero"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittextbackground"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Genero"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/id"
+        app:layout_constraintStart_toStartOf="@+id/id"
+        app:layout_constraintTop_toBottomOf="@+id/id" />
+
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittextbackground"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Id"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/nombre"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nombre"
+        app:layout_constraintTop_toBottomOf="@+id/nombre" />
+
+    <EditText
+        android:id="@+id/precio"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittextbackground"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/genero"
+        app:layout_constraintStart_toStartOf="@+id/genero"
+        app:layout_constraintTop_toBottomOf="@+id/genero" />
+
+    <CheckBox
+        android:id="@+id/alquilado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Alquilado"
+        app:layout_constraintEnd_toEndOf="@+id/precio"
+        app:layout_constraintStart_toStartOf="@+id/precio"
+        app:layout_constraintTop_toBottomOf="@+id/precio" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#9C27B0"
+        android:text="cancelar"
+        app:layout_constraintEnd_toStartOf="@+id/alquilado"
+        app:layout_constraintStart_toStartOf="@+id/precio"
+        app:layout_constraintTop_toBottomOf="@+id/alquilado" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#9C27B0"
+        android:text="añadir"
+        app:layout_constraintEnd_toEndOf="@+id/precio"
+        app:layout_constraintStart_toEndOf="@+id/alquilado"
+        app:layout_constraintTop_toBottomOf="@+id/alquilado" />
+</androidx.constraintlayout.widget.ConstraintLayout>

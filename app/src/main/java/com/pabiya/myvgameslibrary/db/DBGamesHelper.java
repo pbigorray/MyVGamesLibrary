@@ -31,6 +31,12 @@ public class DBGamesHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists games");
     }
+    public boolean checkGame(int id,Context context){
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from games where id=?",new String[]{String.valueOf(id)});
+        Toast.makeText(context, "hay: "+cursor.getCount(), Toast.LENGTH_SHORT).show();
+        return cursor.getCount() <= 0;
+    }
 
     public void addData(){
         insertData(1,"Stardew valley","simulation", 2.50f,0);
@@ -50,6 +56,19 @@ public class DBGamesHelper extends SQLiteOpenHelper {
         values.put("alquilado",alquilado);
 
         long result=db.insert("games",null,values);
+        return result != 0;
+    }
+    public boolean updateData(int id,String name,String gender,float price, int alquilado){
+        SQLiteDatabase db =this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+
+        values.put("id",id);
+        values.put("name",name);
+        values.put("gender",gender);
+        values.put("price",price);
+        values.put("alquilado",alquilado);
+
+        long result=db.update("games",values,"id=?",new String[]{String.valueOf(id)});
         return result != 0;
     }
 
