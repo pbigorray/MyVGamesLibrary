@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVGamesLibrary">
         <activity
+            android:name=".activitys.UpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.AddGameActivity"
             android:exported="false" />
         <activity

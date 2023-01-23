@@ -10,61 +10,63 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pabiya.myvgameslibrary.R;
-import com.pabiya.myvgameslibrary.SplashActivity;
 import com.pabiya.myvgameslibrary.VideoGames;
 import com.pabiya.myvgameslibrary.db.DBGamesHelper;
 
-public class AddGameActivity extends AppCompatActivity {
-    EditText nombre,id,genero,precio;
+public class UpdateActivity extends AppCompatActivity {
+    EditText id;
     CheckBox alquilado;
-    Button add,cancel,update;
+    Button add,cancel, update;
     DBGamesHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_game);
+        setContentView(R.layout.activity_update);
         db = new DBGamesHelper(this);
-        nombre=findViewById(R.id.nombre);
         id=findViewById(R.id.id);
-        genero=findViewById(R.id.genero);
-        precio=findViewById(R.id.precio);
         alquilado=findViewById(R.id.alquilado);
         add=findViewById(R.id.add);
-        update=findViewById(R.id.update);
         cancel=findViewById(R.id.cancel);
+        update=findViewById(R.id.update);
 
         Bundle aux = getIntent().getExtras();
+
+        if (aux.getInt("id")!=0){
+            id.setText(""+aux.getInt("id"));
+            int al=db.getGame(aux.getInt("id"));
+            if (al==1){
+                alquilado.setChecked(true);
+            }
+
+        }
         update.setOnClickListener(view -> {
-            Intent intent = new Intent(this, UpdateActivity.class);
-            intent.putExtra("admin",aux.getBoolean("admin"));
-            startActivity(intent);
-        });
-
-        add.setOnClickListener(view -> {
-
-            String name= nombre.getText().toString();
-            String gender= genero.getText().toString();
             int id = Integer.parseInt(this.id.getText().toString());
-            float price= Float.parseFloat(precio.getText().toString());
+
             int al=0;
             if (alquilado.isChecked()){
                 al=1;
             }
 
-                db.insertData(id,name,gender,price,al);
-                Toast.makeText(this, "El juego se a añadido correctamente", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, VideoGames.class);
-                intent.putExtra("admin",aux.getBoolean("admin"));
-                startActivity(intent);
-
-
+            db.updateData(id,al);
+            Toast.makeText(this, "El juego se actualizado correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, VideoGames.class);
+            intent.putExtra("admin",aux.getBoolean("admin"));
+            startActivity(intent);
         });
 
+        add.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddGameActivity.class);
+            intent.putExtra("admin",aux.getBoolean("admin"));
+            startActivity(intent);
+        });
         cancel.setOnClickListener(view -> {
             Intent intent = new Intent(this, VideoGames.class);
             intent.putExtra("admin",aux.getBoolean("admin"));
             startActivity(intent);
         });
+
+
     }
 }

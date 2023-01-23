@@ -58,35 +58,21 @@ public class DBGamesHelper extends SQLiteOpenHelper {
         long result=db.insert("games",null,values);
         return result != 0;
     }
-    public boolean updateData(int id,String name,String gender,float price, int alquilado){
+    public boolean updateData(int id, int alquilado){
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues values=new ContentValues();
-
         values.put("id",id);
-        values.put("name",name);
-        values.put("gender",gender);
-        values.put("price",price);
         values.put("alquilado",alquilado);
 
         long result=db.update("games",values,"id=?",new String[]{String.valueOf(id)});
         return result != 0;
     }
-
-//    public boolean checkUser(String user){
-//        SQLiteDatabase db =this.getWritableDatabase();
-//        Cursor cursor=db.rawQuery("select * from games where user=?",new String[]{user});
-//        return cursor.getCount() <= 0;
-//    }
-//    public boolean checkUserPass(String user,String password){
-//        SQLiteDatabase db =this.getWritableDatabase();
-//        Cursor cursor=db.rawQuery("select * from games where user=? and password=?",new String[]{user,password});
-//        return cursor.getCount() <= 0;
-//    }
-//    public Cursor getAll(){
-//        SQLiteDatabase db =this.getReadableDatabase();
-//        Cursor cursor=db.rawQuery("select * from games",null);
-//        return cursor;
-//    }
+        public int getGame(int id){
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from games where id=?",new String[]{String.valueOf(id)});
+            cursor.moveToFirst();
+        return cursor.getInt(4);
+    }
     public List<Game> getAll(){
         SQLiteDatabase db =this.getReadableDatabase();
         Cursor cursor=db.rawQuery("select * from games",null);
